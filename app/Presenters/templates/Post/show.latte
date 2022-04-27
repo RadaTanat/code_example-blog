@@ -1,0 +1,25 @@
+{block navig}
+	<li class="main_menu" n:if="$user->loggedIn"><a n:href="Edit:edit $post->id">Upravit toto téma</a></li>
+{/block}
+
+{block content}
+<div class="date">{$post->created_at|date:'j.m.Y'}</div>
+
+<h2 n:block=title><u>{$post->title}</u></h2>
+
+<div class="post">{$post->content}</div>
+
+<h3 style="margin-top: 20px; margin-bottom: 5px;"><i>Komentáře:</i></h3>
+
+<div class="comments">
+	{foreach $comments as $comment}
+		<div style="margin-bottom:10px;">
+			<b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">{$comment->name}</a></b> napsal:
+			<div>{$comment->content}</div>
+		</div>
+	{/foreach}
+</div>
+
+<h2>Poslat nový komentář</h2>
+
+{control commentForm}

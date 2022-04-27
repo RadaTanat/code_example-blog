@@ -1,0 +1,20 @@
+{block navig}
+	<li class="main_menu" n:if="$user->isloggedIn()"><a n:href="Edit:create">Vložit nové téma</a></li>
+{/block}
+
+{block content}
+	<div>
+		<h1 n:block="title">Diskuze</h1>
+	</div>
+	<div n:foreach="$posts as $post" class="post" st>
+		<div class="date">{$post->created_at|date:'j.m.Y'}</div>
+
+		<h2 style="margin:0px;"><a n:href="Post:show $post->id">{$post->title}</a></h2>
+
+		<div>{$post->content}</div>
+	</div>
+
+	<p><a n:href="this, page: $page-1" n:if="$page > 1">‹ back</a>
+		&nbsp;
+	<a n:href="this, page: $page+1" n:if="$iterations">Další ›</a></p>
+{/block}

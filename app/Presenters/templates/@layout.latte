@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset} Mathesio Test</title>
+
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+</head>
+
+<body>
+	<ul class="navig">
+		<li class="main_menu"><a n:href="Homepage:">Diskuze</a></li>
+		{block navig}{/block}
+		{if $user->isloggedIn()}
+			<li class="main_menu"><a n:href="Sign:out">Odhlásit se</a></li>
+		{else}
+			<li class="main_menu"><a n:href="Sign:in">Přihlásit se</a></li>
+			<li class="main_menu"><a n:href="Registration:">Registrace</a></li>
+		{/if}
+	</ul>
+<br>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	<br><br>
+	{include content}
+
+
+	{block scripts}
+	<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+	{/block}
+</body>
+</html>
